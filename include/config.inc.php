@@ -6,8 +6,11 @@ $debug = TRUE;
 //Error reporting
 ($debug)?error_reporting(E_ALL):error_reporting(0);
 
-// Database setup
-include "./class/database.class.php";
-$database = new Db();
+// Classes
+include "../class/database.class.php";
+include "../class/user.class.php";
+
+// DB Connect
+$database = new DB();
 
 ?>
