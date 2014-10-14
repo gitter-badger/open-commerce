@@ -1,6 +1,6 @@
 ;<?php return; ?>
 [SQL]
 host = localhost
-user = root
-password = 
-dbname = testdb
+user = osc
+password = oscdev
+dbname = osc
