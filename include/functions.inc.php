@@ -1,4 +1,4 @@
-<?
+<?php
 	function d($var,$txt){
 		echo '<pre><code>';
 		echo '<b>' . $txt. '</b>';
