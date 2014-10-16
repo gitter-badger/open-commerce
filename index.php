@@ -1,23 +1,17 @@
 <?php
 	require "./include/config.inc.php";
+	require "./include/functions.inc.php";
 	
 	/*
-	*	Testing search function
+	*	Testing
 	*-------------------
-	$userID = null;
-	$email = null;
-	$username = "test1";
-	$search = getUser(new User(), $userID, $email, $username);
-	if ($debug) d($search, "getUser Returned: ");
 	*/
+	//$userID = "2";
+	//$email = null;
+	//$username = "test1";
+	//$search = getUser(new User(), $userID, $email, $username);
+	//if ($debug) d($search, "getUser Returned: ");
 	
-	/*
-	*	Todo list
-	*-------------------
-	*Delete User
-	*$user->id = "17";	
-	*$delete = $user->Delete();
-	*/
 
 	/*
 	*	Create new user
@@ -43,68 +37,15 @@
 	}
 	*/
 	
-	
-	/*------------------------------------------------------
-	*					BEGIN FUNCTIONS
-	*------------------------------------------------------*/
-	function d($var,$txt){
-		echo '<pre><code>';
-		echo '<b>' . $txt. '</b>';
-		var_dump($var);
-		echo '</code></pre>';
+	/*
+	*	Delete user
+	*	$delete = deleteUser(new User(), $userID);
+	*--------------------
+	try {
+		$delete = deleteUser(new User(), $userID);
+		if ($debug) d($delete, "deleteUser Returned: ");
+	} catch (Exception $e) {
+		if ($debug) echo 'Caught exception: ',  $e->getMessage(), "\n";
 	}
-	
-	function newUser($userObj, $email, $username, $password, $salt){
-		$allUsers = $userObj->all();
-		foreach($allUsers as $each){
-			if (array_search($email, array_values($each))){
-				return false;
-			}
-		}
-		
-		$userObj->email = $email;
-		$userObj->username  = $username;
-		$userObj->password = hash_hmac('sha256', $password, $salt);
-
-		if ($userObj->create()){
-			return true;
-		} else {
-			throw new Exception('Create function has failed!');
-		}
-	}
-	
-	function updateUser($userObj, $userID, $field, $value){
-		$userObj->id = $userID;	
-		$userObj->$field = $value;
-
-		if ($userObj->save()){
-			return true;
-		} else {
-			throw new Exception('Update function has failed!');
-		}
-	}
-	
-	function getUser($userObj, $userID, $email, $username){
-		if ($userID == NULL){
-			$allUsers = $userObj->all();
-			foreach ($allUsers as $each){
-				if ($email == NULL && $username == NULL){
-					return -1;
-					//throw new Exception('Did not provide search criteria!');
-				} else if ($email != NULL){
-					if (array_search($email, array_values($each))){
-						$userObj->id = $each['id'];
-					}
-				} else if ($username != NULL){
-					if (array_search($username, array_values($each))){
-						$userObj->id = $each['id'];
-					}
-				}
-			}
-		} else {
-			$userObj->id = $userID;
-		}
-		$userObj->find();
-		return get_object_vars($userObj);
-	}
+	*/
 ?>
