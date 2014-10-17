@@ -3,6 +3,10 @@
 	<head>
 		<meta charset="utf-8" />
 		<link rel="stylesheet" href="include/html/css/style.css" />
+		<script src="class/js/hmac-sha256.js"></script>
+		<script>
+			var hash = CryptoJS.HmacSHA256("Message", "Secret Passphrase");
+		</script>
 	</head>
 	<body>
 		<form name="login" action="submit" method="post">
