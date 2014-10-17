@@ -14,5 +14,4 @@ require "./class/user.class.php";
 // DB Connect
 $database = new DB();
 //if ($debug){ print_r($database); }
-
 ?>

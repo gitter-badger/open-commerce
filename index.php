@@ -2,50 +2,32 @@
 	require "./include/config.inc.php";
 	require "./include/functions.inc.php";
 	
-	/*
-	*	Testing
-	*-------------------
-	*/
-	//$userID = "2";
-	//$email = null;
-	//$username = "test1";
-	//$search = getUser(new User(), $userID, $email, $username);
-	//if ($debug) d($search, "getUser Returned: ");
-	
+	$requestURI = explode('/', $_SERVER['REQUEST_URI']);
+	$scriptName = explode('/',$_SERVER['SCRIPT_NAME']);
+	 
+	for($i= 0;$i < sizeof($scriptName);$i++){
+		if ($requestURI[$i] == $scriptName[$i]){
+			unset($requestURI[$i]);
+		}
+	}
 
-	/*
-	*	Create new user
-	*	$create = newUser(new User(), $email, $username, $password, $salt);
-	*-------------------
-	try {
-		$create = newUser(new User(), $email, $username, $password, $salt);
-		if ($debug) d($create, "newUser Returned: ");
-	} catch (Exception $e) {
-		if ($debug) echo 'Caught exception: ',  $e->getMessage(), "\n";
-	}
-	*/
+	$com = array_values($requestURI);
+	//d($com);
 	
-	/*
-	*	Update user field
-	*	$update = updateUser(new User(), $userID, $field, $value);
-	*--------------------
-	try {
-		$update = updateUser(new User(), $userID, $field, $value);
-		if ($debug) d($update, "updateUser Returned: ");
-	} catch (Exception $e) {
-		if ($debug) echo 'Caught exception: ',  $e->getMessage(), "\n";
+	if(empty($com[0]))
+		include "./include/html/home.inc";
+	else switch($com[0]){
+		case 'login' :
+			include "./include/html/login.inc";
+			break;
+
+		case 'commandTwo' :
+			echo 'You entered command: '.$com[0];
+			break;
+
+		default:
+			header('HTTP/1.1 404 Not Found');
+			break;
 	}
-	*/
-	
-	/*
-	*	Delete user
-	*	$delete = deleteUser(new User(), $userID);
-	*--------------------
-	try {
-		$delete = deleteUser(new User(), $userID);
-		if ($debug) d($delete, "deleteUser Returned: ");
-	} catch (Exception $e) {
-		if ($debug) echo 'Caught exception: ',  $e->getMessage(), "\n";
-	}
-	*/
+
 ?>

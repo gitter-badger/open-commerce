@@ -1,0 +1,10 @@
+<!DOCTYPE HTML>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="stylesheet" href="include/html/css/style.css" />
+	</head>
+	<body>
+		<p>Home</p>
+	</body>
+</html>

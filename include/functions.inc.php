@@ -1,12 +1,12 @@
 <?php
-	function d($var,$txt){
+	function d($var,$txt=""){
 		echo '<pre><code>';
 		echo '<b>' . $txt. '</b>';
-		var_dump($var);
+		print_r($var);
 		echo '</code></pre>';
 	}
 	
-	function newUser($userObj, $email, $username, $password, $salt){
+	function newUser($userObj, $email, $username, $password){
 		$allUsers = $userObj->all();
 		foreach($allUsers as $each){
 			if (array_search($email, array_values($each))){
@@ -16,8 +16,10 @@
 		
 		$userObj->email = $email;
 		$userObj->username  = $username;
-		$userObj->password = hash_hmac('sha256', $password, $salt);
-
+		$userObj->salt = time();
+		$userObj->password = hash_hmac('sha256', $password, $userObj->salt);
+		
+		
 		if ($userObj->create()){
 			return true;
 		} else {
@@ -56,8 +58,11 @@
 		} else {
 			$userObj->id = $userID;
 		}
-		$userObj->find();
-		return get_object_vars($userObj);
+		if ($userObj->find()){
+			return get_object_vars($userObj);
+		} else {
+			return 0;
+		}
 	}
 	
 	function deleteUser($userObj, $userID){
@@ -67,6 +72,27 @@
 			return true;
 		} else {
 			throw new Exception('Delete function has failed!');
+		}
+	}
+	
+	function userLogin($userObj, $ident, $password){
+		static $userData;
+		if(!filter_var($ident, FILTER_VALIDATE_EMAIL)){
+			$userData = getUser($userObj, null, null, $ident);
+		} else {
+			$userData = getUser($userObj, null, $ident, null);
+		}
+		
+		if ($userData != 0 && $userData != -1){
+			if ($userData['password'] == $password){
+				session_start();
+				setcookie("OCc", session_id(), strtotime('+30 days'));
+				updateUser($userObj, $userData['id'], "session", session_id());
+			} else {
+				throw new Exception('Login failed.');
+			}
+		} else {
+			throw new Exception('Login failed.');
 		}
 	}
 ?>
