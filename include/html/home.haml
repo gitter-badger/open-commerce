@@ -1,0 +1,18 @@
+!!! 5
+%html(lang = "en")
+  %head
+    %title OpenCommerce Home
+    %meta(charset = "utf-8")
+    %link(href = "include/html/css/style.css" rel="stylesheet")
+  %body
+    #content
+      .entry-title OpenCommerce Home
+      .entry-content
+        - if (isset($foo))
+          Variable foo is: #{$foo}
+
+    #footer
+      %ul#links
+        %li
+          %a(href = "/login") Login
+      © Innervation Studios

@@ -1,0 +1,15 @@
+{
+    "name": "Josh/open-commerce",
+    "description": "Open Source ecommerce",
+    "require": {
+        "mthaml/mthaml": "dev-master"
+    },
+    "license": "GNU GPL v3.0",
+    "authors": [
+        {
+            "name": "Josh McDonald",
+            "email": "jm.sentry@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev"
+}

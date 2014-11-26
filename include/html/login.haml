@@ -1,0 +1,25 @@
+!!! 5
+%html(lang = "en")
+  %head
+    %title OpenCommerce Login
+    %meta(charset = "utf-8")
+    %link(href = "include/html/css/style.css" rel="stylesheet")
+    %script(src = "class/js/hmac-sha256.js")
+    %script
+      var hash = CryptoJS.HmacSHA256("Message", "Secret Passphrase");
+  %body
+    #content
+      .entry-title OpenCommerce Login
+      .entry-content
+        %form(action = "submit" method = "post" name = "login")
+          Username/Email:
+          %input(name = "ident" type = "text")
+          Password:
+          %input(name = "password" type = "password")
+          %input(type = "submit" value = "Submit")
+
+    #footer
+      %ul#links
+        %li
+          %a(href = "/") Homepage
+      © Innervation Studios

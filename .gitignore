@@ -1,2 +1,3 @@
-oc-workspace
 *.txt
+/vendor/
+*.lock
